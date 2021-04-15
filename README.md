@@ -1,6 +1,6 @@
 ## Bubble Game
 
-My first computer game using Unity.
+2D computer game using Unity.
 
 ---
 
@@ -9,7 +9,7 @@ My first computer game using Unity.
 
 ---
 
-### Racing Game Demo
+### Bubble Game Demo
 
 
 ---
