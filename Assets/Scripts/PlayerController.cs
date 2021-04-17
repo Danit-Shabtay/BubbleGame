@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int jumpForce;
     public int playerSpeed;
+
     Vector2 direction;
     Rigidbody2D rb2d;
+
+    public bool isGrounded;
+    public float groundRadius;
+    public LayerMask whatIsGround;
+    public Transform[] groundPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +21,28 @@ public class PlayerController : MonoBehaviour
         direction = Vector2.right;
         rb2d = GetComponent<Rigidbody2D>();
     }
+
+    void Update()
+    {
+        isGrounded = checkIsGrounded();
+
+        if(isGrounded && Input.GetKeyDown("up"))
+        {
+            rb2d.AddForce(new Vector2 (0, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    bool checkIsGrounded()
+    {
+        for (int i = 0; i < groundPoints.Length; i++)
+        {
+            if (Physics2D.OverlapCircle(groundPoints[i].position, groundRadius, whatIsGround))
+            {
+                return true;
+            }    
+        }
+        return false;
+    }    
 
     // Update is called once per frame
     void FixedUpdate()
