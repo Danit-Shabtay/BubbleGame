@@ -6,18 +6,25 @@ public class PlayerController : MonoBehaviour
 {
     public int jumpForce;
     public int playerSpeed;
-
-    Vector2 direction;
-    Rigidbody2D rb2d;
+    public float shootDelay;
 
     public bool isGrounded;
     public float groundRadius;
     public LayerMask whatIsGround;
     public Transform[] groundPoints;
 
+    public GameObject bubblePrefab;
+    public Transform bubbleSpawnPoint;
+
+    bool canShoot;
+    Vector2 direction;
+    Rigidbody2D rb2d;
+
     // Start is called before the first frame update
     void Start()
     {
+        canShoot = true;
+
         direction = Vector2.right;
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -30,6 +37,20 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(new Vector2 (0, jumpForce), ForceMode2D.Impulse);
         }
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
+        {
+            StartCoroutine (ShootBubble());
+        }
+    }
+
+    IEnumerator ShootBubble ()
+    {
+        GameObject bubble = Instantiate(bubblePrefab, bubbleSpawnPoint.position, Quaternion.identity);
+        bubble.GetComponent<BubbleController>().direction = direction;
+
+        canShoot = false;
+        yield return new WaitForSeconds(shootDelay);
+        canShoot = true;
     }
 
     bool checkIsGrounded()
@@ -44,7 +65,6 @@ public class PlayerController : MonoBehaviour
         return false;
     }    
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float inputX = Input.GetAxis("Horizontal");
