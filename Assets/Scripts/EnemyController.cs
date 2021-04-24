@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlatformEnd"))
         {

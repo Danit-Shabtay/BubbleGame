@@ -19,4 +19,12 @@ public class BubbleController : MonoBehaviour
     {
         rb2d.velocity = direction * speed;
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("ChangeDirection"))
+        {
+            direction = other.GetComponent<ChangeDirection>().direction;
+        }
+    }
 }
