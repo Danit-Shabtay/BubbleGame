@@ -135,4 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  shootSpeed: 0
   direction: {x: 1, y: 0}
+  timeBetweenScale: 0.2
