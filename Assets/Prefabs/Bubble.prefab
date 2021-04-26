@@ -138,3 +138,5 @@ MonoBehaviour:
   shootSpeed: 0
   direction: {x: 1, y: 0}
   timeBetweenScale: 0.2
+  grayBubble: {fileID: 21300000, guid: 0d58c1ca933f6824eaf7c437ff604991, type: 3}
+  transparentBubble: {fileID: 21300000, guid: 7196c4be5758a594dbd3ace699aed090, type: 3}

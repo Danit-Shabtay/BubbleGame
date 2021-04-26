@@ -9,6 +9,12 @@ public class BubbleController : MonoBehaviour
     public Vector2 direction;
     public float timeBetweenScale;
 
+    public Sprite grayBubble;
+    public Sprite transparentBubble;
+
+    float screenTopY;
+    float ScreenBottomY;
+
     Rigidbody2D rb2d;
     bool isSpawnFinish;
     float originalSpeed;
@@ -20,11 +26,14 @@ public class BubbleController : MonoBehaviour
         originalSpeed = speed;
         originalScale = transform.localScale;
 
+        screenTopY = Camera.main.ViewportToWorldPoint(new Vector2(0, 1)).y;
+        ScreenBottomY = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y;
+
         rb2d = GetComponent<Rigidbody2D>();
 
         StartCoroutine(SpawnBubble());
-
         StartCoroutine(AnimateBubble());
+        StartCoroutine(DestroyBubbleOverTime());
     }
 
     IEnumerator AnimateBubble()
@@ -66,6 +75,18 @@ public class BubbleController : MonoBehaviour
         direction = Vector2.up;
     }
 
+    IEnumerator DestroyBubbleOverTime()
+    {
+        yield return new WaitForSeconds(5f);
+        GetComponent<SpriteRenderer>().sprite = grayBubble;
+
+        yield return new WaitForSeconds(5f);
+        GetComponent<SpriteRenderer>().sprite = transparentBubble;
+
+        yield return new WaitForSeconds(5f);
+        DestroyBubble();
+    }
+
     void FixedUpdate()
     {
         rb2d.velocity = direction * speed;
@@ -77,5 +98,14 @@ public class BubbleController : MonoBehaviour
         {
             direction = other.GetComponent<ChangeDirection>().direction;
         }
+        if (other.CompareTag("Player"))
+        {
+            DestroyBubble();
+        }
+    }
+
+    void DestroyBubble()
+    {
+        Destroy(this.gameObject);
     }
 }
