@@ -9,6 +9,7 @@ public class ChangeDirection : MonoBehaviour
 
     void Awake()
     {
+        transform.SetAsLastSibling();
         GetComponent<SpriteRenderer>().enabled = isVisible;
     }
 }
