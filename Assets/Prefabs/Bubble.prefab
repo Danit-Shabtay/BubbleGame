@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2676299251299023552}
   m_Layer: 0
   m_Name: Bubble
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,8 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  shootSpeed: 0
+  shootSpeed: 9
   direction: {x: 1, y: 0}
   timeBetweenScale: 0.2
   grayBubble: {fileID: 21300000, guid: 0d58c1ca933f6824eaf7c437ff604991, type: 3}
   transparentBubble: {fileID: 21300000, guid: 7196c4be5758a594dbd3ace699aed090, type: 3}
+  enemyTrapped: {fileID: 21300000, guid: ebff8ffd08bc1ec40b83c2505f083e85, type: 3}

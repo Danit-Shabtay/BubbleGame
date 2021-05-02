@@ -12,6 +12,9 @@ public class BubbleController : MonoBehaviour
     public Sprite grayBubble;
     public Sprite transparentBubble;
 
+    public Sprite enemyTrapped;
+
+    float bubbleYoffset;
     float screenTopY;
     float ScreenBottomY;
 
@@ -20,20 +23,34 @@ public class BubbleController : MonoBehaviour
     float originalSpeed;
     Vector2 originalScale;
 
+    Coroutine spawnBubbleRoutine;
+
     // Start is called before the first frame update
     void Start()
     {
         originalSpeed = speed;
         originalScale = transform.localScale;
 
+        bubbleYoffset = GetComponent<SpriteRenderer>().bounds.extents.y;
+
         screenTopY = Camera.main.ViewportToWorldPoint(new Vector2(0, 1)).y;
         ScreenBottomY = Camera.main.ViewportToWorldPoint(new Vector2(0, 0)).y;
 
         rb2d = GetComponent<Rigidbody2D>();
 
+        spawnBubbleRoutine = StartCoroutine (SpawnBubble());
+
         StartCoroutine(SpawnBubble());
         StartCoroutine(AnimateBubble());
         StartCoroutine(DestroyBubbleOverTime());
+    }
+
+    private void Update()
+    {
+        if(transform.position.y > screenTopY + bubbleYoffset)
+        {
+            transform.position = new Vector2(transform.position.x, ScreenBottomY - bubbleYoffset);
+        }
     }
 
     IEnumerator AnimateBubble()
@@ -102,6 +119,24 @@ public class BubbleController : MonoBehaviour
         {
             DestroyBubble();
         }
+        if (other.CompareTag("Wall"))
+        {
+            StopBubbleSpawn();
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            GetComponent<SpriteRenderer>().sprite = enemyTrapped;
+        }
+    }
+
+    void StopBubbleSpawn()
+    {
+        StopCoroutine(spawnBubbleRoutine);
+        isSpawnFinish = true;
+
+        speed = originalSpeed;
+        direction = Vector2.up;
+        transform.localScale = originalScale;
     }
 
     void DestroyBubble()

@@ -21,6 +21,11 @@ public class EnemyController : MonoBehaviour
         {
             Flip();
         }
+        if (other.CompareTag("Bubble"))
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     void Flip()

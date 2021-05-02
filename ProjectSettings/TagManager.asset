@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PlatformEnd
   - ChangeDirection
+  - Wall
+  - Bubble
+  - Enemy
   layers:
   - Default
   - TransparentFX
