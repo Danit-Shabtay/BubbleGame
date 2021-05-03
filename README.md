@@ -10,6 +10,6 @@
 ---
 
 ### Demo
-
+<img src="img/Demo.gif" width=650>
 
 ---
