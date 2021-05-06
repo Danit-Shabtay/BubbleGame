@@ -6,6 +6,7 @@ public class BubbleController : MonoBehaviour
 {
     public float speed;
     public float shootSpeed;
+    public float enemyCaptureSpeed;
     public Vector2 direction;
     public float timeBetweenScale;
 
@@ -24,6 +25,7 @@ public class BubbleController : MonoBehaviour
     Vector2 originalScale;
 
     Coroutine spawnBubbleRoutine;
+    Coroutine destroyBubbleOverTimeRoutine;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class BubbleController : MonoBehaviour
 
         StartCoroutine(SpawnBubble());
         StartCoroutine(AnimateBubble());
-        StartCoroutine(DestroyBubbleOverTime());
+        destroyBubbleOverTimeRoutine = StartCoroutine(DestroyBubbleOverTime());
     }
 
     private void Update()
@@ -125,6 +127,10 @@ public class BubbleController : MonoBehaviour
         }
         if (other.CompareTag("Enemy"))
         {
+            StopBubbleSpawn();
+            StopCoroutine(destroyBubbleOverTimeRoutine);
+
+            speed = enemyCaptureSpeed;
             GetComponent<SpriteRenderer>().sprite = enemyTrapped;
         }
     }

@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   shootSpeed: 9
+  enemyCaptureSpeed: 1
   direction: {x: 1, y: 0}
   timeBetweenScale: 0.2
   grayBubble: {fileID: 21300000, guid: 0d58c1ca933f6824eaf7c437ff604991, type: 3}
