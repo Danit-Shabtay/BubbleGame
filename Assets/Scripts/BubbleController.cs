@@ -10,6 +10,8 @@ public class BubbleController : MonoBehaviour
     public Vector2 direction;
     public float timeBetweenScale;
 
+    public int floatingBubblesLayerID;
+
     public Sprite grayBubble;
     public Sprite transparentBubble;
 
@@ -89,9 +91,11 @@ public class BubbleController : MonoBehaviour
 
             speed = speed / 2;
         }
+
         isSpawnFinish = true;
         speed = originalSpeed;
         direction = Vector2.up;
+        gameObject.layer = floatingBubblesLayerID;
     }
 
     IEnumerator DestroyBubbleOverTime()
@@ -143,6 +147,7 @@ public class BubbleController : MonoBehaviour
         speed = originalSpeed;
         direction = Vector2.up;
         transform.localScale = originalScale;
+        gameObject.layer = floatingBubblesLayerID;
     }
 
     void DestroyBubble()

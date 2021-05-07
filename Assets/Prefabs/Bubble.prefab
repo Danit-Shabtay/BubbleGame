@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2312809661932920945}
   - component: {fileID: 5431670152676232804}
   - component: {fileID: 2676299251299023552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bubble
   m_TagString: Bubble
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706419752723330938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.22, y: 0, z: 0}
+  m_LocalPosition: {x: 1.72, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   enemyCaptureSpeed: 1
   direction: {x: 1, y: 0}
   timeBetweenScale: 0.2
+  floatingBubblesLayerID: 10
   grayBubble: {fileID: 21300000, guid: 0d58c1ca933f6824eaf7c437ff604991, type: 3}
   transparentBubble: {fileID: 21300000, guid: 7196c4be5758a594dbd3ace699aed090, type: 3}
   enemyTrapped: {fileID: 21300000, guid: ebff8ffd08bc1ec40b83c2505f083e85, type: 3}
