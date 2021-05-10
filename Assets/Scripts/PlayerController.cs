@@ -82,4 +82,17 @@ public class PlayerController : MonoBehaviour
 
         rb2d.velocity = new Vector2(inputX * playerSpeed, rb2d.velocity.y);
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Enemy")){
+            KillPlayer();
+
+        }
+    }
+
+    void KillPlayer()
+    {
+        Destroy(this.gameObject);
+    }
 }
