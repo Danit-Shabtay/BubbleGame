@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     public int playerSpeed;
     public float shootDelay;
 
+    public float flyForce;
+
+    public int blinksCount;
+    public float timeBetweenBlinks;
+
     public bool isGrounded;
     public float groundRadius;
     public LayerMask whatIsGround;
@@ -15,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bubblePrefab;
     public Transform bubbleSpawnPoint;
+
+    public Transform PlayerSpawnPosition;
 
     bool canShoot;
     Vector2 direction;
@@ -93,6 +100,36 @@ public class PlayerController : MonoBehaviour
 
     void KillPlayer()
     {
-        Destroy(this.gameObject);
+        StartCoroutine(RespawnPlayer());
+    }
+
+    IEnumerator RespawnPlayer()
+    {
+        canShoot = false;
+
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        rb2d.AddForce(Vector2.up * flyForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(2f);
+
+        rb2d.velocity = new Vector2(0, 0);
+
+        transform.position = PlayerSpawnPosition.position;
+
+        GetComponent<BoxCollider2D>().enabled = true;
+
+        for (int i=0; i<blinksCount; i++)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+
+            yield return new WaitForSeconds(timeBetweenBlinks);
+
+            GetComponent<SpriteRenderer>().enabled = true;
+
+            yield return new WaitForSeconds(timeBetweenBlinks);
+
+        }
+        canShoot = true;
     }
 }
