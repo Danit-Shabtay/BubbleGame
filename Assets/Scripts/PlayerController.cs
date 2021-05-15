@@ -94,7 +94,14 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Enemy")){
             KillPlayer();
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Collectable"))
+        {
+            Destroy(other.gameObject);
         }
     }
 
@@ -130,6 +137,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenBlinks);
 
         }
+
         canShoot = true;
     }
 }

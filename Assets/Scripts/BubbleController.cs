@@ -16,6 +16,7 @@ public class BubbleController : MonoBehaviour
     public Sprite transparentBubble;
 
     public Sprite enemyTrapped;
+    public GameObject collectablePrefab;
 
     float bubbleYoffset;
     float screenTopY;
@@ -23,6 +24,7 @@ public class BubbleController : MonoBehaviour
 
     Rigidbody2D rb2d;
     bool isSpawnFinish;
+    bool isEnemyCaptured;
     float originalSpeed;
     Vector2 originalScale;
 
@@ -32,6 +34,7 @@ public class BubbleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isEnemyCaptured = false;
         originalSpeed = speed;
         originalScale = transform.localScale;
 
@@ -134,6 +137,7 @@ public class BubbleController : MonoBehaviour
             StopBubbleSpawn();
             StopCoroutine(destroyBubbleOverTimeRoutine);
 
+            isEnemyCaptured = true;
             speed = enemyCaptureSpeed;
             GetComponent<SpriteRenderer>().sprite = enemyTrapped;
         }
@@ -152,6 +156,11 @@ public class BubbleController : MonoBehaviour
 
     void DestroyBubble()
     {
+        if(isEnemyCaptured == true)
+        {
+            Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+        }
+
         Destroy(this.gameObject);
     }
 }
