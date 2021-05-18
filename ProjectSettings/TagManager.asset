@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Bubble
   - Enemy
+  - Collectable
   layers:
   - Default
   - TransparentFX
