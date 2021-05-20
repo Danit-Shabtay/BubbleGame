@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int score;
+    public int bubbleScore;
+    public int collectableScore;
+
     public int jumpForce;
     public int playerSpeed;
     public float shootDelay;
@@ -99,8 +103,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Bubble"))
+        {
+            score = score + bubbleScore;
+        }
         if (other.CompareTag("Collectable"))
         {
+            score = score + collectableScore;
             Destroy(other.gameObject);
         }
     }
