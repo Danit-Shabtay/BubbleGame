@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int lives;
     public int score;
     public int bubbleScore;
     public int collectableScore;
@@ -116,7 +117,12 @@ public class PlayerController : MonoBehaviour
 
     void KillPlayer()
     {
-        StartCoroutine(RespawnPlayer());
+        lives--;
+
+        if (lives > 0)
+        {
+            StartCoroutine(RespawnPlayer());
+        }
     }
 
     IEnumerator RespawnPlayer()
