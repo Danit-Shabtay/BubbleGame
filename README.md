@@ -5,17 +5,17 @@
 ---
 
 ### Main-menu screen
-<img src="img/Main-menu.png" width=700>
+<img src="img/Main-menu.png" width=650>
 
 ---
 
 ### End-of-game screen
-<img src="img/End-of-game.png" width=700>
+<img src="img/End-of-game.png" width=650>
 
 ---
 
 ### Development Process
-<img src="img/BubbleGameProcessgif.gif" width=650>
+<img src="img/BubbleGameProcessgif.gif" width=500>
 
 ---
 
