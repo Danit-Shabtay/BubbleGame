@@ -168,7 +168,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1da9e9b29948aa7428b080045f0299df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54c1cd592ff8b34fb765c0a48aa6459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 0
   score: 0
   bubbleScore: 10
   collectableScore: 100
@@ -260,6 +261,10 @@ MonoBehaviour:
   bubblePrefab: {fileID: 706419752723330938, guid: 8c1d40006d5cbb14badea0c985b10eb5, type: 3}
   bubbleSpawnPoint: {fileID: 5025811812102541667}
   PlayerSpawnPosition: {fileID: 0}
+  jumpSound: {fileID: 0}
+  shootSound: {fileID: 0}
+  pickUpSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1 &5025811813477575274
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,12 +25,18 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bubblePrefab;
     public Transform bubbleSpawnPoint;
-
     public Transform PlayerSpawnPosition;
+
+    // Sounds
+    public AudioClip jumpSound;
+    public AudioClip shootSound;
+    public AudioClip pickUpSound;
+    public AudioClip deathSound;
 
     bool canShoot;
     Vector2 direction;
     Rigidbody2D rb2d;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
         direction = Vector2.right;
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if(isGrounded && Input.GetKeyDown("up"))
         {
             rb2d.AddForce(new Vector2 (0, jumpForce), ForceMode2D.Impulse);
+            audioSource.PlayOneShot(jumpSound);
         }
         if (Input.GetKeyDown(KeyCode.Space) && canShoot == true)
         {
@@ -59,6 +67,8 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bubble = Instantiate(bubblePrefab, bubbleSpawnPoint.position, Quaternion.identity);
         bubble.GetComponent<BubbleController>().direction = direction;
+
+        audioSource.PlayOneShot(shootSound);
 
         canShoot = false;
         yield return new WaitForSeconds(shootDelay);
@@ -111,6 +121,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Collectable"))
         {
             score = score + collectableScore;
+            audioSource.PlayOneShot(pickUpSound);
             Destroy(other.gameObject);
         }
     }
@@ -118,6 +129,7 @@ public class PlayerController : MonoBehaviour
     void KillPlayer()
     {
         lives--;
+        audioSource.PlayOneShot(deathSound);
 
         if (lives > 0)
         {

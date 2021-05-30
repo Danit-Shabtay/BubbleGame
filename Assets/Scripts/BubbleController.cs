@@ -9,14 +9,15 @@ public class BubbleController : MonoBehaviour
     public float enemyCaptureSpeed;
     public Vector2 direction;
     public float timeBetweenScale;
-
     public int floatingBubblesLayerID;
 
     public Sprite grayBubble;
     public Sprite transparentBubble;
-
     public Sprite enemyTrapped;
     public GameObject collectablePrefab;
+
+    public AudioClip enemyPopSound;
+    public AudioClip bubblePopSound;
 
     float bubbleYoffset;
     float screenTopY;
@@ -27,6 +28,7 @@ public class BubbleController : MonoBehaviour
     bool isEnemyCaptured;
     float originalSpeed;
     Vector2 originalScale;
+    AudioSource audioSource;
 
     Coroutine spawnBubbleRoutine;
     Coroutine destroyBubbleOverTimeRoutine;
@@ -37,6 +39,7 @@ public class BubbleController : MonoBehaviour
         isEnemyCaptured = false;
         originalSpeed = speed;
         originalScale = transform.localScale;
+        audioSource = GetComponent<AudioSource>();
 
         bubbleYoffset = GetComponent<SpriteRenderer>().bounds.extents.y;
 
@@ -156,11 +159,20 @@ public class BubbleController : MonoBehaviour
 
     void DestroyBubble()
     {
+        AudioClip destroySound;
+
         if(isEnemyCaptured == true)
         {
             Instantiate(collectablePrefab, transform.position, Quaternion.identity);
+            destroySound = enemyPopSound;
+        } else
+        {
+            destroySound = bubblePopSound;
         }
+        GetComponent<SpriteRenderer>().enabled = false;
 
-        Destroy(this.gameObject);
+        audioSource.PlayOneShot(destroySound);
+
+        Destroy(this.gameObject,destroySound.length);
     }
 }
