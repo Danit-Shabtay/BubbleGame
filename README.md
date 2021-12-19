@@ -6,12 +6,12 @@
 ---
 
 ### Main-menu screen
-<img src="img/Main-menu.png" height=400 width=650>
+<img src="img/Main-menu.png" width=650>
 
 ---
 
 ### End-of-game screen
-<img src="img/End-of-game.png" height=400 width=650>
+<img src="img/End-of-game.png" width=650>
 
 ---
 
@@ -21,6 +21,6 @@
 ---
 
 ### Demo
-<img src="img/Demo.gif" height=400 width=650>
+<img src="img/Demo.gif" width=650>
 
 ---
